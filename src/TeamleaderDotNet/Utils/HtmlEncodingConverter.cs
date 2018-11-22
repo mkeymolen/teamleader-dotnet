@@ -17,7 +17,12 @@ namespace TeamleaderDotNet.Utils
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return WebUtility.HtmlDecode(reader.Value.ToString());
+            if (reader.Value != null)
+            {
+                return WebUtility.HtmlDecode(reader.Value.ToString().Trim());
+            }
+
+            return null;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
